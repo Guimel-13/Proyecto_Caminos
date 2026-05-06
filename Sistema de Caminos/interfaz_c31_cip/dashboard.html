@@ -1,0 +1,39 @@
+<section id="sec-overview" class="seccion activa h-full overflow-y-auto pr-2 scroll-custom">
+    
+    <div id="dashboard-vacio" class="h-full flex flex-col items-center justify-center text-center pb-20">
+        <div class="w-24 h-24 bg-accent/10 text-accent rounded-full flex items-center justify-center text-5xl mb-6 border border-accent/20 shadow-[0_0_30px_rgba(168,85,247,0.2)]">
+            <i class="fas fa-seedling"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-white mb-3">¡Bienvenido al Sistema Caminos!</h2>
+        <p class="text-slate-400 max-w-lg mx-auto mb-8 leading-relaxed">
+            El sistema está listo para operar, pero detectamos que aún no se ha creado ninguna <strong>Gestión</strong> (año de trabajo). Para desbloquear los módulos y empezar a registrar documentos, por favor crea la primera gestión.
+        </p>
+        <button onclick="abrirModalNuevaGestion()" class="bg-accent hover:bg-accenthover text-white px-8 py-3 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] flex items-center gap-3 text-lg hover:scale-105">
+            <i class="fas fa-plus-circle"></i> Iniciar Primera Gestión
+        </button>
+    </div>
+
+    <div id="dashboard-con-datos" class="hidden">
+        <div class="mb-8 mt-2">
+            <h2 class="text-2xl font-bold text-white mb-1">Resumen del Sistema</h2>
+            <p class="text-slate-400 text-sm">Seleccione o abra una gestión para comenzar a trabajar y desbloquear los módulos.</p>
+        </div>
+
+        <div class="mb-10">
+            <h3 class="text-xs font-bold text-accent uppercase tracking-widest mb-4 flex items-center gap-2">
+                <i class="fas fa-clock"></i> Gestión Reciente / Actual
+            </h3>
+            <div id="gestiones-recientes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+        </div>
+
+        <div class="mb-10">
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <i class="fas fa-archive"></i> Todas las Gestiones Existentes
+            </h3>
+            <div id="gestiones-existentes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+        </div>
+    </div>
+
+</section>

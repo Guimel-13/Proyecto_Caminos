@@ -1,0 +1,44 @@
+<header class="flex justify-between items-center mb-6 bg-darkcard p-4 rounded-2xl border border-slate-800/50 flex-shrink-0">
+    <div class="flex items-center gap-3 bg-[#0B1120] px-4 py-2 rounded-xl border border-slate-700 relative">
+        <i class="fas fa-calendar-alt text-accent"></i>
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Gestión Activa:</span>
+        <select id="gestionGlobal" onchange="cambiarGestion()" class="bg-transparent text-accent font-black text-lg outline-none text-center border-b border-transparent focus:border-accent transition-colors cursor-pointer appearance-none pr-4">
+            </select>
+        <i class="fas fa-chevron-down text-slate-500 text-[10px] absolute right-4 pointer-events-none"></i>
+    </div>
+
+    <div class="bg-[#0B1120] border border-slate-700 rounded-full px-4 py-2 flex items-center w-1/3">
+        <i class="fas fa-search text-slate-500 mr-3"></i>
+        <input type="text" id="buscadorGlobal" oninput="ejecutarBusquedaGlobal()" placeholder="Buscar por detalle, preventivo, código o beneficiario..." class="bg-transparent border-none outline-none text-sm w-full text-slate-200">
+    </div>
+
+    <div class="relative">
+        <div class="flex items-center gap-3 cursor-pointer hover:bg-slate-800/50 py-1 px-2 rounded-xl transition-colors" onclick="toggleMenuPerfil()">
+            <div class="text-right hidden md:block mr-2">
+                <p id="lblNombreUsuario" class="text-white text-sm font-bold">Cargando...</p>
+                <p id="lblRolUsuario" class="text-[10px] text-emerald-400 uppercase font-bold tracking-wider">...</p>
+            </div>
+            <img id="imgAvatarUsuario" src="" class="w-10 h-10 rounded-full border-2 border-slate-700">
+            <i class="fas fa-chevron-down text-slate-500 text-xs ml-1"></i>
+        </div>
+
+        <div id="menuPerfilDropdown" class="absolute right-0 mt-3 w-56 bg-[#151C2C] border border-slate-700 rounded-xl shadow-2xl py-2 hidden z-50 transform opacity-0 scale-95 transition-all duration-200">
+            <div class="px-4 py-3 border-b border-slate-700/50 mb-2 bg-[#0B1120]/50">
+                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider mb-1">Conectado como</p>
+                <p id="lblNombreDropdown" class="text-sm text-white font-bold truncate">Cargando...</p>
+            </div>
+
+            <button onclick="navegar('perfil'); toggleMenuPerfil()" class="w-full text-left px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3">
+                <i class="fas fa-user w-4 text-center text-slate-500"></i> Mi Perfil
+            </button>
+            <button onclick="navegar('configuracion'); toggleMenuPerfil()" class="w-full text-left px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3">
+                <i class="fas fa-cog w-4 text-center text-slate-500"></i> Configuración
+            </button>
+
+            <div class="h-px bg-slate-700/50 my-2"></div>
+            <button onclick="cerrarSesion()" class="w-full text-left px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors flex items-center gap-3 font-bold">
+                <i class="fas fa-sign-out-alt w-4 text-center"></i> Cerrar Sesión
+            </button>
+        </div>
+    </div>
+</header>

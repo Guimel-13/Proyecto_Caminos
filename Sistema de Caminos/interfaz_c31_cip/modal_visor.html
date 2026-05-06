@@ -1,0 +1,20 @@
+<div id="modalVisor" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[999] hidden flex items-center justify-center p-4 lg:p-10 transition-opacity">
+    <div class="bg-[#151C2C] w-full h-full max-w-7xl rounded-2xl border border-slate-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="modalVisorContent">
+        <div class="bg-[#0B1120] p-4 text-white flex justify-between items-center border-b border-slate-800">
+            <span id="tituloDocModal" class="text-sm font-bold tracking-widest text-slate-300">
+                <i class="fas fa-file-pdf text-red-400 mr-2"></i> Cargando documento...
+            </span>
+            <div class="flex gap-4 items-center">
+                <button class="text-slate-400 hover:text-white transition-colors px-2"><i class="fas fa-print"></i></button>
+                <button class="text-slate-400 hover:text-white transition-colors px-2"><i class="fas fa-download"></i></button>
+                <div class="w-px h-5 bg-slate-700 mx-2"></div>
+                <button onclick="cerrarVisor()" class="text-slate-400 hover:text-white transition-colors w-8 h-8 rounded-full bg-slate-800 hover:bg-red-500 flex items-center justify-center">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="flex-1 bg-[#0f1523] flex items-center justify-center relative">
+            <iframe id="visorPdfModal" class="w-full h-full border-none absolute inset-0" src=""></iframe>
+        </div>
+    </div>
+</div>

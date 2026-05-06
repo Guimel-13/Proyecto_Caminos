@@ -1,0 +1,10 @@
+
+{
+    "liveServer.settings.ignoreFiles": [
+        ".vscode/**",
+        "temp_scans/**",
+        "backend-caminos/**",
+        "**/*.pdf"
+    ],
+    "liveServer.settings.port": 5501
+}

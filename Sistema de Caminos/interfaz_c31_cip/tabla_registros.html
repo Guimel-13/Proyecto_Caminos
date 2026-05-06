@@ -1,0 +1,85 @@
+<section class="seccion h-[calc(100vh-160px)] flex flex-col min-h-0">
+    <div class="w-full flex flex-col bg-darkcard rounded-2xl border border-slate-800/50 overflow-hidden h-full shadow-lg min-h-0">
+
+        <div class="p-4 border-b border-slate-800 bg-[#151C2C] flex justify-between items-center flex-shrink-0">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                Documentos de la Gestión Activa
+            </span>
+
+            <div class="flex gap-3">
+                <button onclick="exportarExcelC31()" class="bg-slate-800 text-slate-300 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-700 transition-colors">
+                    <i class="fas fa-file-excel mr-2 text-emerald-400"></i> Exportar
+                </button>
+
+                <button onclick="abrirModalRegistro()" class="bg-accent hover:bg-accenthover text-white px-5 py-2 rounded-lg text-xs font-bold transition-all shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                    <i class="fas fa-plus mr-2"></i> Nuevo Registro
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-x-auto overflow-y-auto scroll-custom relative min-h-0">
+            <table class="w-full text-left text-xs whitespace-nowrap min-w-full">
+
+                <thead class="bg-[#0B1120] text-[10px] uppercase font-bold text-slate-500 tracking-wider sticky top-0 z-10 shadow-sm">
+                    <tr>
+                        <th class="p-4 border-b border-slate-800">Cód</th>
+                        <th class="p-4 border-b border-slate-800 text-accent">Correlativo</th>
+                        <th class="p-4 border-b border-slate-800">Gestión</th>
+                        <th class="p-4 border-b border-slate-800">Beneficiario</th>
+                        <th class="p-4 border-b border-slate-800 min-w-[200px]">Detalle / Resumen</th>
+                        <th class="p-4 border-b border-slate-800">Prev.</th>
+                        <th class="p-4 border-b border-slate-800">Comp.</th>
+                        <th class="p-4 border-b border-slate-800">Dev.</th>
+                        <th class="p-4 border-b border-slate-800">Secuencia</th>
+                        <th class="p-4 border-b border-slate-800 text-right">Importe</th>
+                        <th class="p-4 border-b border-slate-800">Fojas</th>
+                        <th class="p-4 border-b border-slate-800">Hoja de Ruta</th>
+                        <th class="p-4 border-b border-slate-800">Libro Reg.</th>
+                        <th class="p-4 border-b border-slate-800">Ubicación Física</th>
+                        <th class="p-4 border-b border-slate-800 text-center sticky right-0 bg-[#0B1120] shadow-[-5px_0_10px_rgba(0,0,0,0.2)]">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody id="cuerpo-tabla-c31-cip" class="divide-y divide-slate-800/50 text-slate-300">
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+
+<div id="modalAuditoria" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 transition-opacity">
+    
+    <div class="bg-[#151C2C] w-full max-w-sm rounded-2xl border border-slate-700 overflow-hidden flex flex-col shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="modalAuditoriaContent">
+        
+        <div class="flex justify-between items-center p-5 border-b border-slate-700/50 bg-[#0B1120]">
+            <h3 class="text-white font-bold text-lg flex items-center gap-2">
+                <i class="fas fa-info-circle text-accent"></i> Detalles de Registro
+            </h3>
+            <button type="button" onclick="cerrarModalAuditoria()" class="text-slate-400 hover:text-white transition-colors w-8 h-8 rounded-full bg-slate-800 hover:bg-red-500 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="p-6 flex flex-col gap-4">
+            <div class="bg-[#0B1120] p-4 rounded-xl border border-slate-700/50 shadow-inner">
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Registrado por</p>
+                <p id="audi_creador" class="text-sm font-bold text-accent flex items-center gap-2"><i class="fas fa-user-shield"></i> Cargando...</p>
+                <p id="audi_fecha_creacion" class="text-xs text-slate-400 mt-2 font-mono bg-slate-800/50 p-1.5 rounded inline-block">...</p>
+            </div>
+            
+            <div class="bg-[#0B1120] p-4 rounded-xl border border-slate-700/50 shadow-inner">
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Última Edición</p>
+                <p id="audi_editor" class="text-sm font-bold text-blue-400 flex items-center gap-2"><i class="fas fa-user-edit"></i> Cargando...</p>
+                <p id="audi_fecha_edicion" class="text-xs text-slate-400 mt-2 font-mono bg-slate-800/50 p-1.5 rounded inline-block">...</p>
+            </div>
+        </div>
+
+        <div class="p-4 border-t border-slate-700/50 bg-[#0B1120] flex justify-end">
+            <button type="button" onclick="cerrarModalAuditoria()" class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 rounded-lg font-bold transition-colors text-sm">Cerrar</button>
+        </div>
+
+    </div>
+</div>

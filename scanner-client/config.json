@@ -1,0 +1,8 @@
+{
+  "puerto_local": 4010,
+  "servidor_central": "http://192.168.1.12:3000",
+  "naps2_path": "C:\\Program Files\\NAPS2\\NAPS2.Console.exe",
+  "perfil_naps2": "EpsonLocal",
+  "temp_dir": "temp_scans_local",
+  "scanner_keywords": ["EPSON", "DS-730N", "SCAN"]
+} 

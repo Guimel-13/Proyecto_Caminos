@@ -1,0 +1,55 @@
+<section class="seccion h-full flex-col overflow-y-auto scroll-custom pr-2">
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-white mb-1"><i class="fas fa-user-circle text-accent mr-2"></i> Mi Perfil</h2>
+        <p class="text-slate-400 text-sm">Gestiona tu información personal y credenciales de acceso.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-darkcard rounded-2xl border border-slate-800/50 p-6 flex flex-col items-center justify-center text-center shadow-lg h-fit">
+            <img id="tarjeta_avatar" src="" class="w-32 h-32 rounded-full border-4 border-slate-800 mb-4 shadow-[0_0_20px_rgba(168,85,247,0.3)]">
+            <h3 id="tarjeta_nombre" class="text-xl font-bold text-white mb-1">Cargando...</h3>
+            <span id="tarjeta_rol" class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">...</span>
+            <p class="text-sm text-slate-400" id="tarjeta_usuario"><i class="fas fa-user-shield mr-1"></i> ...</p>
+            <p class="text-sm text-slate-400 mt-2" id="tarjeta_telefono"><i class="fas fa-phone mr-1"></i> ...</p>
+        </div>
+
+        <div class="lg:col-span-2 bg-darkcard rounded-2xl border border-slate-800/50 p-6 shadow-lg">
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-700/50 pb-2">Datos de la Cuenta</h4>
+            
+            <form class="space-y-6" onsubmit="event.preventDefault(); actualizarPerfilBD();">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre Completo</label>
+                        <input type="text" id="perfil_nombre" required class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-white outline-none focus:border-accent">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Teléfono</label>
+                        <input type="text" id="perfil_telefono" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-white outline-none focus:border-accent">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre de Usuario (Login)</label>
+                        <input type="text" id="perfil_usuario" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-slate-400 outline-none focus:border-accent cursor-not-allowed" readonly title="El nombre de usuario no se puede cambiar">
+                    </div>
+                </div>
+
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 mt-8 border-b border-slate-700/50 pb-2">Seguridad y Contraseña</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nueva Contraseña</label>
+                        <input type="password" id="perfil_pwd_nueva" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-white outline-none focus:border-accent" placeholder="Dejar en blanco para no cambiar">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Confirmar Nueva Contraseña</label>
+                        <input type="password" id="perfil_pwd_conf" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-white outline-none focus:border-accent" placeholder="Repita la nueva contraseña">
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button type="submit" id="btnGuardarPerfil" class="bg-accent hover:bg-accenthover text-white px-8 py-2.5 rounded-lg font-bold transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)] text-sm flex items-center gap-2">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

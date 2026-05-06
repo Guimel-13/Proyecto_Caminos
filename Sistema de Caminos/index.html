@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Caminos - Archivo Digital Pro</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0B1120',      
+                        darkcard: '#151C2C',    
+                        accent: '#A855F7',      
+                        accenthover: '#9333EA', 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+</head>
+
+<body class="bg-darkbg text-slate-300 h-screen overflow-hidden flex font-sans relative">
+
+    <div id="caja-menu" class="h-full flex-shrink-0 z-20"></div>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden p-6 relative">
+        <div id="caja-header" class="flex-shrink-0"></div>
+
+        <div id="caja-dashboard" class="h-full"></div>
+
+        <div id="caja-tabla_c31_cip" class="h-full hidden"></div>
+        <div id="caja-tabla_c31_sip" class="h-full hidden"></div>
+        <div id="caja-tabla_c21_cip" class="h-full hidden"></div>
+        <div id="caja-tabla_c21_sip" class="h-full hidden"></div>
+        <div id="caja-tabla_asientos_manuales" class="h-full hidden"></div>
+        <div id="caja-empastados" class="h-full hidden"></div>
+
+        <div id="caja-gestiones" class="h-full hidden"></div>
+        <div id="caja-usuarios" class="h-full hidden"></div>
+        <div id="caja-prestamos" class="h-full hidden"></div>
+
+        <div id="caja-perfil" class="h-full hidden"></div>
+        <div id="caja-configuracion" class="h-full hidden"></div>
+
+    </main>
+
+    <div id="caja-modal-registro"></div>
+    <div id="caja-modal-visor"></div>
+    <div id="caja-modal-registro-sip"></div>
+    <div id="caja-modal-registro-c21-cip"></div>
+    <div id="caja-modal-registro-c21-sip"></div>
+    <div id="caja-modal-asientos-manuales"></div>
+    <div id="caja-modal-empastados"></div>
+    
+    <div id="caja-modal-usuarios"></div>
+    <div id="caja-modal-auth-admin"></div>
+    <div id="caja-modal-eliminar-usuario"></div>
+    <div id="caja-modal-prestamos"></div>
+    <div id="caja-modal-gestion"></div>
+
+    <div id="modalAccesoDenegado" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-[#151C2C] w-full max-w-sm rounded-2xl border border-red-500/50 flex flex-col shadow-[0_0_30px_rgba(239,68,68,0.2)] transform scale-95 opacity-0 transition-all duration-300" id="modalAccesoDenegadoContent">
+            
+            <div class="p-8 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-red-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="w-20 h-20 bg-[#0B1120] text-red-400 rounded-full flex items-center justify-center mx-auto text-4xl mb-5 border border-red-500/30 shadow-inner relative z-10">
+                    <i class="fas fa-lock"></i>
+                </div>
+                
+                <h3 class="text-white font-black text-2xl mb-2 relative z-10">Acceso Restringido</h3>
+                
+                <p class="text-slate-400 text-sm mb-8 leading-relaxed relative z-10">
+                    Para acceder a este módulo, primero debe <strong>seleccionar o crear una Gestión</strong> en el panel principal.
+                </p>
+                
+                <button onclick="cerrarModalAccesoDenegado()" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(239,68,68,0.4)] relative z-10 flex items-center justify-center gap-2">
+                    <i class="fas fa-check-circle"></i> Entendido
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/c31_cip.js"></script>
+    <script src="js/c31_sip.js"></script>
+    <script src="js/c21_cip.js"></script>
+    <script src="js/c21_sip.js"></script>
+    <script src="js/asientos.js"></script>
+    <script src="js/prestamos.js"></script>
+    <script src="js/gestiones.js"></script>
+    <script src="js/registros_empastados.js"></script>
+
+    <script src="js/hardware.js"></script>
+
+    <script src="js/usuarios.js"></script>
+    <script src="js/roles.js"></script>
+    <script src="js/perfil.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

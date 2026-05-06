@@ -1,0 +1,58 @@
+<div id="modalEmpastados" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 transition-opacity">
+    <div id="modalEmpastadosContent" class="bg-[#151C2C] w-full max-w-6xl rounded-2xl border border-slate-700 flex flex-col shadow-2xl transform scale-95 opacity-0 transition-all duration-300 max-h-[92vh] overflow-hidden">
+        
+        <div class="flex justify-between items-center p-6 border-b border-slate-700/50 bg-[#0B1120] flex-shrink-0">
+            <h3 id="tituloPopupEmpastados" class="text-white font-bold text-lg flex items-center gap-3">
+                <i class="fas fa-folder-open text-accent"></i> Registros Empastados
+            </h3>
+
+            <button onclick="cerrarPopupEmpastado()" class="text-slate-400 hover:text-white transition-colors w-8 h-8 rounded-full bg-slate-800 hover:bg-red-500 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="p-4 border-b border-slate-700/50 bg-[#151C2C] flex flex-wrap gap-2 flex-shrink-0">
+            <button onclick="abrirPopupEmpastado('c31_cip')" class="bg-accent text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow-[0_0_12px_rgba(168,85,247,0.35)]">
+                <i class="fas fa-folder-open"></i> C-31 CIP
+            </button>
+
+            <button onclick="abrirPopupEmpastado('c31_sip')" class="bg-slate-800/70 text-slate-300 hover:text-white hover:bg-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all">
+                <i class="fas fa-folder-open"></i> C-31 SIP
+            </button>
+
+            <button onclick="abrirPopupEmpastado('c21_cip')" class="bg-slate-800/70 text-slate-300 hover:text-white hover:bg-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all">
+                <i class="fas fa-folder-open"></i> C-21 CIP
+            </button>
+
+            <button onclick="abrirPopupEmpastado('c21_sip')" class="bg-slate-800/70 text-slate-300 hover:text-white hover:bg-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all">
+                <i class="fas fa-folder-open"></i> C-21 SIP
+            </button>
+
+            <button onclick="abrirPopupEmpastado('asientos_manuales')" class="bg-slate-800/70 text-slate-300 hover:text-white hover:bg-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all">
+                <i class="fas fa-book"></i> Asientos Manuales
+            </button>
+
+            <button onclick="abrirPopupEmpastado('formulario_bancarizacion')" class="bg-slate-800/70 text-slate-300 hover:text-white hover:bg-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all">
+                <i class="fas fa-file-invoice-dollar"></i> Formulario Bancarización
+            </button>
+        </div>
+
+        <div id="contenidoPopupEmpastados" class="p-6 overflow-y-auto scroll-custom flex-1">
+            <div class="w-full h-full flex items-center justify-center">
+                <div class="text-center py-12">
+                    <div class="w-20 h-20 mx-auto rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-archive text-3xl text-accent"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-lg">Archivo Empastado</h4>
+                    <p class="text-slate-500 text-sm mt-2">Seleccione uno de los filtros de arriba para visualizar la tabla correspondiente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-4 border-t border-slate-700/50 bg-[#0B1120] flex justify-end gap-3 flex-shrink-0">
+            <button type="button" onclick="cerrarPopupEmpastado()" class="px-5 py-2 rounded-lg text-slate-400 font-bold hover:text-slate-200 transition-colors text-sm">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>

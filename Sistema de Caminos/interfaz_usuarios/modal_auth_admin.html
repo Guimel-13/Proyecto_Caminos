@@ -1,0 +1,23 @@
+<div id="modalAuthAdmin" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-[#151C2C] w-full max-w-sm rounded-2xl border border-accent/50 flex flex-col shadow-[0_0_30px_rgba(168,85,247,0.15)] transform scale-95 opacity-0 transition-all duration-300" id="modalAuthContent">
+        
+        <div class="p-6 text-center">
+            <div class="w-16 h-16 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-accent/20">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Autenticación Requerida</h3>
+            <p class="text-xs text-slate-400 mb-6">Ingrese su contraseña de <span class="text-accent font-bold">Administrador</span> para revelar este dato sensible.</p>
+            
+            <input type="password" id="inputAdminPwd" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-3 text-center text-white tracking-widest outline-none focus:border-accent transition-colors mb-2" placeholder="••••••••">
+            <p id="errorAuthMsg" class="text-red-400 text-xs font-bold hidden">Contraseña incorrecta.</p>
+        </div>
+        
+        <div class="p-4 border-t border-slate-700/50 bg-[#0B1120] flex justify-end gap-3 rounded-b-2xl">
+            <button type="button" onclick="cerrarAuthAdmin()" class="px-4 py-2 rounded-lg text-slate-400 font-bold hover:text-slate-200 transition-colors text-xs">Cancelar</button>
+            <button type="button" onclick="verificarPasswordAdmin()" class="bg-accent hover:bg-accenthover text-white px-6 py-2 rounded-lg font-bold transition-all shadow-[0_0_10px_rgba(168,85,247,0.4)] text-xs">
+                Verificar
+            </button>
+        </div>
+
+    </div>
+</div>

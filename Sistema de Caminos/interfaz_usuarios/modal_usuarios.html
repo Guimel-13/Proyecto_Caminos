@@ -1,0 +1,59 @@
+<div id="modalUsuarios" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 lg:p-8 transition-opacity">
+    <div class="bg-[#151C2C] w-full max-w-2xl rounded-2xl border border-slate-700 flex flex-col shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="modalUsuariosContent">
+        
+        <div class="flex justify-between items-center p-6 border-b border-slate-700/50 bg-[#0B1120]">
+            <h3 id="tituloFormularioUsuario" class="text-white font-bold text-xl flex items-center gap-3">
+                <i class="fas fa-user-plus text-accent"></i> Nuevo Usuario
+            </h3>
+            <button onclick="cerrarModalUsuario()" class="text-slate-400 hover:text-white transition-colors w-8 h-8 rounded-full bg-slate-800 hover:bg-red-500 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="p-6">
+            <form id="formUsuario" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="hidden" id="usr_id_oculto" value="">
+
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre Completo</label>
+                    <input type="text" id="usr_nombre_completo" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-slate-200 outline-none focus:border-accent/50 transition-colors" placeholder="Ej: Juan Pérez">
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Número de Teléfono</label>
+                    <input type="number" id="usr_telefono" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-slate-200 outline-none focus:border-accent/50 transition-colors" placeholder="Ej: 70012345">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-accent mb-1">Nivel de Acceso (Rol)</label>
+                    <select id="modal_usuario_rol_id" class="w-full bg-[#0B1120] border border-accent/50 rounded-lg px-4 py-2.5 text-white outline-none focus:border-accent transition-colors cursor-pointer font-bold">
+                        <option value="">Cargando roles...</option>
+                    </select>
+                    <p class="text-[9px] text-slate-500 mt-1">*Seleccione un rol creado en Configuración.</p>
+                </div>
+
+                <div class="md:col-span-2 border-t border-slate-700/50 pt-4 mt-2">
+                    <h4 class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-3">Credenciales de Acceso</h4>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Usuario (Username)</label>
+                    <input type="text" id="usr_username" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-emerald-400 font-bold outline-none focus:border-accent/50 transition-colors" placeholder="Ej: juan_p">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Contraseña</label>
+                    <input type="text" id="usr_password" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-lg px-4 py-2.5 text-slate-200 outline-none focus:border-accent/50 transition-colors" placeholder="Asigne una contraseña">
+                </div>
+            </form>
+        </div>
+        
+        <div class="p-4 border-t border-slate-700/50 bg-[#0B1120] flex justify-end gap-4">
+            <button type="button" onclick="cerrarModalUsuario()" class="px-6 py-2 rounded-lg text-slate-400 font-bold hover:text-slate-200 transition-colors text-sm">Cancelar</button>
+            <button type="button" onclick="guardarUsuarioBD()" class="bg-accent hover:bg-accenthover text-white px-8 py-2 rounded-lg font-bold transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)] text-sm">
+                Guardar Usuario
+            </button>
+        </div>
+
+    </div>
+</div>

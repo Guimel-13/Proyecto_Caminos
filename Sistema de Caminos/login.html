@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema Caminos</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0B1120',      
+                        darkcard: '#151C2C',    
+                        accent: '#A855F7',      
+                        accenthover: '#9333EA', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Pequeño estilo para la barra de scroll si la caja se hace muy alta */
+        .scroll-custom::-webkit-scrollbar { width: 6px; }
+        .scroll-custom::-webkit-scrollbar-track { background: transparent; }
+        .scroll-custom::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+    </style>
+</head>
+
+<body class="bg-darkbg text-slate-300 h-screen w-screen flex items-center justify-center font-sans overflow-hidden relative">
+
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-accent/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="bg-darkcard w-full max-w-md rounded-2xl border border-slate-700/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] p-8 relative z-10 max-h-[95vh] overflow-y-auto scroll-custom">
+        
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-700 shadow-inner">
+                <i class="fas fa-folder-open text-3xl text-accent"></i>
+            </div>
+            <h1 class="text-white font-bold text-2xl tracking-wide">Sistema<span class="text-accent">Caminos</span></h1>
+            <p class="text-xs text-slate-500 uppercase tracking-widest mt-2">Archivo Digital Pro</p>
+        </div>
+
+        <div id="caja-login" class="hidden">
+            <form onsubmit="iniciarSesion(event)">
+                <div class="space-y-5 mb-8">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Usuario</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-slate-500"></i>
+                            </div>
+                            <input type="text" id="login_usuario" required class="w-full bg-[#0B1120] border border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-white outline-none focus:border-accent transition-colors" placeholder="Ingrese su usuario">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Contraseña</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-slate-500"></i>
+                            </div>
+                            <input type="password" id="login_password" required class="w-full bg-[#0B1120] border border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-white outline-none focus:border-accent transition-colors" placeholder="••••••••">
+                        </div>
+                    </div>
+                </div>
+
+                <p id="msgError" class="text-red-400 text-xs font-bold text-center mb-4 hidden">Usuario o contraseña incorrectos.</p>
+
+                <button type="submit" class="w-full bg-accent hover:bg-accenthover text-white py-3.5 rounded-xl font-bold transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2 group">
+                    Ingresar al Sistema <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+            
+            <div class="mt-8 text-center">
+                <p class="text-[10px] text-slate-500">¿Olvidó su contraseña? Contacte al Administrador.</p>
+            </div>
+        </div>
+
+        <div id="caja-setup" class="hidden">
+            <div class="text-center mb-6">
+                <h2 class="text-lg font-bold text-emerald-400 mb-1"><i class="fas fa-crown mr-2"></i>Configuración Inicial</h2>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Cree el Súper Administrador</p>
+            </div>
+            
+            <form>
+                <div class="space-y-4 mb-6">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-id-card text-slate-500"></i>
+                        </div>
+                        <input type="text" id="setup_nombre" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-xl pl-11 pr-4 py-2.5 text-white outline-none focus:border-emerald-500 transition-colors text-sm" placeholder="Nombre Completo">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-phone text-slate-500"></i>
+                        </div>
+                        <input type="text" id="setup_telefono" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-xl pl-11 pr-4 py-2.5 text-white outline-none focus:border-emerald-500 transition-colors text-sm" placeholder="Teléfono / Celular">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-user-shield text-slate-500"></i>
+                        </div>
+                        <input type="text" id="setup_usuario" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-xl pl-11 pr-4 py-2.5 text-white outline-none focus:border-emerald-500 transition-colors text-sm" placeholder="Usuario Administrador">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-key text-slate-500"></i>
+                        </div>
+                        <input type="password" id="setup_password" class="w-full bg-[#0B1120] border border-slate-700/50 rounded-xl pl-11 pr-4 py-2.5 text-white outline-none focus:border-emerald-500 transition-colors text-sm" placeholder="Contraseña Segura">
+                    </div>
+                </div>
+
+                <div class="bg-[#0B1120] border border-slate-700/50 rounded-xl p-4 mb-6">
+                    <h3 class="text-[10px] font-bold text-slate-400 mb-3 uppercase tracking-wider border-b border-slate-800 pb-2">Permisos del Sistema</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_leer" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-slate-300 group-hover:text-white transition-colors">Leer Registros</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_crear" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-slate-300 group-hover:text-white transition-colors">Crear Registros</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_editar" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-slate-300 group-hover:text-white transition-colors">Editar Registros</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_eliminar" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-slate-300 group-hover:text-white transition-colors">Eliminar Registros</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_pdf" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-slate-300 group-hover:text-white transition-colors">Manejar PDFs</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_prestar" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-slate-300 group-hover:text-white transition-colors">Préstamo Docs</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_admin_usuarios" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors">Admin. Usuarios</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="permiso_admin_gestiones" checked class="w-4 h-4 accent-emerald-500 bg-slate-800 border-slate-600 rounded">
+                            <span class="text-xs text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors">Admin. Gestiones</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="button" onclick="crearPrimerAdmin()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
+                    <i class="fas fa-check-circle"></i> Crear Sistema y Entrar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

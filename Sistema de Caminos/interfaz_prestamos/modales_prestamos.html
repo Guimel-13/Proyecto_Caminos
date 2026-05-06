@@ -1,0 +1,187 @@
+<div id="modalBusquedaPrestamo" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[150] hidden flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-[#151C2C] w-full max-w-6xl rounded-2xl border border-slate-700 shadow-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]" id="modalBusquedaContent">
+        
+        <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-[#0B1120] rounded-t-2xl">
+            <h3 class="text-white font-black text-xl flex items-center gap-2"><i class="fas fa-search text-accent"></i> Buscar Documento a Prestar</h3>
+            <button onclick="cerrarModalBusquedaPrestamo()" class="text-slate-500 hover:text-red-400 transition-colors"><i class="fas fa-times text-xl"></i></button>
+        </div>
+
+        <div class="p-6 overflow-y-auto scroll-custom">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-2">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Gestión</label>
+                    <input type="number" id="bp-gestion" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all" readonly>
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Tipo de Documento</label>
+                    <select id="bp-tipo" onchange="cambiarLabelBusqueda()" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all appearance-none cursor-pointer">
+                        <option value="C-31 CIP">C-31 CIP</option>
+                        <option value="C-31 SIP">C-31 SIP</option>
+                        <option value="C-21 ER CIP">C-21 ER CIP</option>
+                        <option value="C-21 ER SIP">C-21 ER SIP</option>
+                        <option value="Asiento Manual">Asiento Manual</option>
+                    </select>
+                </div>
+                <div>
+                    <label id="lbl-bp-numero" class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold transition-all">N° Preventivo</label>
+                    <input type="text" id="bp-numero" placeholder="Ej: 1024" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Importe (Opcional)</label>
+                    <input type="number" id="bp-importe" placeholder="0.00" step="0.01" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all">
+                </div>
+                <div class="flex items-end">
+                    <button onclick="ejecutarBusquedaAvanzada()" class="w-full bg-accent hover:bg-accenthover text-white font-bold py-2.5 rounded-lg transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)]"><i class="fas fa-search mr-2"></i> Buscar</button>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Palabras clave en Detalle/Resumen (Opcional)</label>
+                <input type="text" id="bp-detalle" placeholder="Ej: compra de material, consultoría, etc." class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all">
+            </div>
+
+            <div id="resultadoBusquedaPrestamo" class="hidden border border-emerald-500/30 bg-emerald-500/5 rounded-xl flex-col overflow-hidden mt-4 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                <div class="p-4 border-b border-emerald-500/30 bg-emerald-500/10 flex justify-between items-center">
+                    <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest"><i class="fas fa-check-circle mr-1"></i> Resultados en el Archivo Físico</p>
+                </div>
+                
+                <div class="overflow-x-auto scroll-custom w-full bg-[#0B1120]/50 max-h-64">
+                    <table class="w-full text-left text-xs whitespace-nowrap min-w-full">
+                        <thead class="bg-[#0B1120] text-[10px] uppercase font-bold text-slate-500 tracking-wider sticky top-0 z-10">
+                            
+                            <tr id="thead-c31-cip">
+                                <th class="p-4 border-b border-slate-700/50">Cód</th>
+                                <th class="p-4 border-b border-slate-700/50">Correlativo</th>
+                                <th class="p-4 border-b border-slate-700/50">Gestión</th>
+                                <th class="p-4 border-b border-slate-700/50">Beneficiario</th>
+                                <th class="p-4 border-b border-slate-700/50 min-w-[200px]">Detalle / Resumen</th>
+                                <th class="p-4 border-b border-slate-700/50">Prev.</th>
+                                <th class="p-4 border-b border-slate-700/50">Comp.</th>
+                                <th class="p-4 border-b border-slate-700/50">Dev.</th>
+                                <th class="p-4 border-b border-slate-700/50">Secuencia</th>
+                                <th class="p-4 border-b border-slate-700/50 text-right">Importe</th>
+                                <th class="p-4 border-b border-slate-700/50">Fojas</th>
+                                <th class="p-4 border-b border-slate-700/50">Hojas de Ruta</th>
+                                <th class="p-4 border-b border-slate-700/50">Libro de Reg.</th>
+                                <th class="p-4 border-b border-slate-700/50">ubicacion Fisica</th>
+                                <th class="p-4 border-b border-slate-700/50 text-center sticky right-0 bg-[#0B1120]">Acción</th>
+                            </tr>
+
+                            <tr id="thead-c31-sip" class="hidden">
+                                <th class="p-4 border-b border-slate-700/50">Cód</th>
+                                <th class="p-4 border-b border-slate-700/50">Correlativo</th>
+                                <th class="p-4 border-b border-slate-700/50">Gestión</th>
+                                <th class="p-4 border-b border-slate-700/50">Beneficiario</th>
+                                <th class="p-4 border-b border-slate-700/50 min-w-[200px]">Detalle / Resumen</th>
+                                <th class="p-4 border-b border-slate-700/50">Devengado</th>
+                                <th class="p-4 border-b border-slate-700/50">Pago</th>
+                                <th class="p-4 border-b border-slate-700/50">Secuencia</th>
+                                <th class="p-4 border-b border-slate-700/50 text-right">Importe</th>
+                                <th class="p-4 border-b border-slate-700/50">Fojas</th>
+                                <th class="p-4 border-b border-slate-700/50">Hojas de Ruta</th>
+                                <th class="p-4 border-b border-slate-700/50">Libro de Reg.</th>
+                                <th class="p-4 border-b border-slate-700/50">ubicacion Fisica</th>
+                                <th class="p-4 border-b border-slate-700/50 text-center sticky right-0 bg-[#0B1120]">Acción</th>
+                            </tr>
+
+                            <tr id="thead-c21-cip" class="hidden">
+                                <th class="p-4 border-b border-slate-700/50">Cód</th>
+                                <th class="p-4 border-b border-slate-700/50">Correlativo</th>
+                                <th class="p-4 border-b border-slate-700/50">Gestión</th>
+                                <th class="p-4 border-b border-slate-700/50">Beneficiario</th>
+                                <th class="p-4 border-b border-slate-700/50 min-w-[200px]">Detalle / Resumen</th>
+                                <th class="p-4 border-b border-slate-700/50">Devengado</th>
+                                <th class="p-4 border-b border-slate-700/50 text-right">Importe</th>
+                                <th class="p-4 border-b border-slate-700/50">Fojas</th>
+                                <th class="p-4 border-b border-slate-700/50">Hojas de Ruta</th>
+                                <th class="p-4 border-b border-slate-700/50">Libro de Reg.</th>
+                                <th class="p-4 border-b border-slate-700/50">ubicacion Fisica</th>
+                                <th class="p-4 border-b border-slate-700/50 text-center sticky right-0 bg-[#0B1120]">Acción</th>
+                            </tr>
+
+                            <tr id="thead-c21-sip" class="hidden">
+                                <th class="p-4 border-b border-slate-700/50">Cód</th>
+                                <th class="p-4 border-b border-slate-700/50">Correlativo</th>
+                                <th class="p-4 border-b border-slate-700/50">Gestión</th>
+                                <th class="p-4 border-b border-slate-700/50">Beneficiario</th>
+                                <th class="p-4 border-b border-slate-700/50 min-w-[200px]">Detalle / Resumen</th>
+                                <th class="p-4 border-b border-slate-700/50">S.I.P</th>
+                                <th class="p-4 border-b border-slate-700/50 text-right">Importe</th>
+                                <th class="p-4 border-b border-slate-700/50">Fojas</th>
+                                <th class="p-4 border-b border-slate-700/50">Hojas de Ruta</th>
+                                <th class="p-4 border-b border-slate-700/50">Libro de Reg.</th>
+                                <th class="p-4 border-b border-slate-700/50">ubicacion Fisica</th>
+                                <th class="p-4 border-b border-slate-700/50 text-center sticky right-0 bg-[#0B1120]">Acción</th>
+                            </tr>
+
+                            <tr id="thead-asientos" class="hidden">
+                                <th class="p-4 border-b border-slate-700/50">Cód</th>
+                                <th class="p-4 border-b border-slate-700/50">Correlativo</th>
+                                <th class="p-4 border-b border-slate-700/50">Gestión</th>
+                                <th class="p-4 border-b border-slate-700/50 min-w-[200px]">Detalle / Resumen</th>
+                                <th class="p-4 border-b border-slate-700/50">N° de Documento</th>
+                                <th class="p-4 border-b border-slate-700/50 text-right">Importe Total</th>
+                                <th class="p-4 border-b border-slate-700/50">Hojas de Ruta</th>
+                                <th class="p-4 border-b border-slate-700/50">Libro de Reg.</th>
+                                <th class="p-4 border-b border-slate-700/50">ubicacion Fisica</th>
+                                <th class="p-4 border-b border-slate-700/50 text-center sticky right-0 bg-[#0B1120]">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-resultados-busqueda" class="text-slate-300 divide-y divide-slate-800/50">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalFormularioPrestamo" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[160] hidden flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-[#151C2C] w-full max-w-lg rounded-2xl border border-slate-700 shadow-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col" id="modalFormularioContent">
+        
+        <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-[#0B1120] rounded-t-2xl">
+            <h3 class="text-white font-black text-xl flex items-center gap-2"><i class="fas fa-file-signature text-accent"></i> Registrar Préstamo</h3>
+            <button onclick="cerrarModalFormularioPrestamo()" class="text-slate-500 hover:text-red-400 transition-colors"><i class="fas fa-times text-xl"></i></button>
+        </div>
+
+        <div class="p-6 overflow-y-auto scroll-custom space-y-4">
+            
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 flex items-start gap-3">
+                <i class="fas fa-info-circle text-blue-400 mt-1"></i>
+                <div>
+                    <p class="text-[10px] text-blue-400 font-bold uppercase tracking-widest mb-1">Documento Seleccionado</p>
+                    <p id="lbl-resumen-doc" class="text-white font-bold text-sm">Cargando...</p>
+                </div>
+            </div>
+
+            <input type="hidden" id="prest_doc_gestion">
+            <input type="hidden" id="prest_doc_tipo">
+            <input type="hidden" id="prest_doc_codigo">
+
+            <div>
+                <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Solicitante (Nombre Completo)</label>
+                <input type="text" id="prest_solicitante" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all" placeholder="Ej. Juan Pérez">
+            </div>
+
+            <div>
+                <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Unidad Solicitante</label>
+                <input type="text" id="prest_unidad" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all" placeholder="Ej. Dirección Financiera">
+            </div>
+
+            <div>
+                <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Motivo / Glosa del Préstamo</label>
+                <textarea id="prest_glosa" rows="2" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all" placeholder="Escriba el motivo..."></textarea>
+            </div>
+
+            <div>
+                <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold">Fecha Límite de Devolución</label>
+                <input type="date" id="prest_limite" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all">
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-slate-800 bg-[#0B1120] rounded-b-2xl flex justify-end gap-3">
+            <button onclick="cerrarModalFormularioPrestamo()" class="px-5 py-2.5 rounded-xl text-slate-400 font-bold hover:text-white hover:bg-slate-800 transition-colors">Cancelar</button>
+            <button onclick="guardarRegistroPrestamo()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"><i class="fas fa-save mr-2"></i> Confirmar Préstamo</button>
+        </div>
+    </div>
+</div>

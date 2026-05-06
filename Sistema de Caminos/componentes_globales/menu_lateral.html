@@ -1,0 +1,96 @@
+<aside class="w-64 bg-darkbg border-r border-slate-800 flex flex-col h-full pt-6 pb-4">
+    
+    <div class="px-6 mb-8 flex items-center gap-3">
+        
+        <span class="text-white font-bold text-xl tracking-wide">Sistema<span class="text-accent">Caminos</span></span>
+    </div>
+    
+    <nav class="flex-1 px-4 space-y-6 overflow-y-auto scroll-custom">
+        
+        <div>
+            <ul class="space-y-2">
+                <li>
+                    <button onclick="navegar('dashboard', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-accent text-white font-medium shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+                        <i class="fas fa-chart-pie w-5"></i> Dashboard
+                    </button>
+                </li>
+            </ul>
+        </div>
+        
+        <div>
+            <p class="text-[11px] text-slate-500 uppercase font-bold tracking-widest mb-3 px-3">Registros</p>
+            <ul class="space-y-2">
+                <li>
+                    <button onclick="navegar('tabla_c31_cip', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-table w-5"></i> C-31 CIP - Registros
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navegar('tabla_c31_sip', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-table w-5"></i> C-31 SIP - Registros
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navegar('tabla_c21_cip', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-table w-5"></i> C-21 ER CIP
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navegar('tabla_c21_sip', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-table w-5"></i> C-21 ER SIP
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navegar('tabla_asientos_manuales', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-book w-5"></i> Asientos Manuales
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <p class="text-[11px] text-slate-500 uppercase font-bold tracking-widest mb-3 px-3">Gestiones</p>
+            <ul class="space-y-2">    
+                <li>
+                    <button onclick="navegar('gestiones', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-calendar-alt w-5"></i> Registros por Gestión
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <p class="text-[11px] text-slate-500 uppercase font-bold tracking-widest mb-3 px-3">Registros Empastados</p>
+            <ul class="space-y-2">    
+                <li>
+                    <button onclick="navegar('empastados', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-folder-open w-5"></i> Registros Empastados
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <p class="text-[11px] text-slate-500 uppercase font-bold tracking-widest mb-3 px-3">Prestamos</p>
+            <ul class="space-y-2">    
+                <li>
+                    <button onclick="navegar('prestamos', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-hand-holding-usd w-5"></i>Préstamos de DOC.
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <p class="text-[11px] text-slate-500 uppercase font-bold tracking-widest mb-3 px-3">Usuarios</p>
+            <ul class="space-y-2">
+                <li>
+                    <button onclick="navegar('usuarios', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all font-medium">
+                        <i class="fas fa-users w-5"></i> Gestión de Usuarios
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</aside>

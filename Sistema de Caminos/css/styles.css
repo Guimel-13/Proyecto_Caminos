@@ -1,0 +1,29 @@
+/* Animación para que las pantallas aparezcan de a poco y no de golpe */
+.seccion { 
+    display: none; 
+    animation: fadeIn 0.3s ease-in-out; 
+}
+
+/* Cuando le pongo la clase 'activa' por JS, se muestra usando flexbox */
+.seccion.activa { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+/* Efecto que mueve el contenido un poquito hacia arriba al aparecer */
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* Pinté la barra de scroll para que no salga la gris por defecto de Windows */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0B1120; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+/* Escondo las flechitas feas que le salen a los inputs de tipo número, me costó encontrar esto jaja */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}

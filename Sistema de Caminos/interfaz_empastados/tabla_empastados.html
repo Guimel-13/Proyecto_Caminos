@@ -1,0 +1,39 @@
+<div class="h-[calc(100vh-160px)] flex flex-col min-h-0">
+    <div class="bg-[#111827]/60 border border-slate-800 rounded-2xl p-5 mb-5 shadow-[0_0_25px_rgba(0,0,0,0.25)] flex-shrink-0">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+                <h2 class="text-white text-xl font-black flex items-center gap-3">
+                    <i class="fas fa-folder-open text-accent"></i>
+                    Registros Empastados
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">
+                    Selecciona un tipo de registro para ver su tabla correspondiente.
+                </p>
+            </div>
+
+            <div class="w-full lg:w-[380px]">
+                <label for="filtroTipoEmpastado" class="block text-[11px] uppercase tracking-widest font-bold text-slate-500 mb-2">
+                    Filtro de Empastado
+                </label>
+                <select
+                    id="filtroTipoEmpastado"
+                    class="w-full bg-[#0B1120] border border-slate-700 text-slate-200 rounded-xl px-4 py-3 outline-none focus:border-accent"
+                    onchange="cambiarFiltroEmpastado()"
+                >
+                    <option value="c31_cip">C-31 CIP</option>
+                    <option value="c31_sip">C-31 SIP</option>
+                    <option value="c21_cip">C-21 CIP</option>
+                    <option value="c21_sip">C-21 SIP</option>
+                    <option value="asientos_manuales">Asientos Manuales</option>
+                    <option value="formulario_bancarizacion">Formulario de Bancarización</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="resumenEmpastadoActual" class="mb-4 flex-shrink-0"></div>
+
+    <div id="contenedorTablaEmpastados" class="flex-1 min-h-0 overflow-hidden">
+        <!-- Aquí se dibuja la tabla según el filtro -->
+    </div>
+</div>

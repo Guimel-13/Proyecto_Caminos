@@ -1,0 +1,16 @@
+{
+  "name": "scanner-client",
+  "version": "1.0.0",
+  "main": "cliente_escaner.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node cliente_escaner.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "cors": "^2.8.5",
+    "multer": "^1.4.5-lts.1",
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.7.0"
+  }
+}

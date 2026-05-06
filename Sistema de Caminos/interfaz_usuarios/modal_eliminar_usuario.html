@@ -1,0 +1,22 @@
+<div id="modalEliminarUsuario" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-[#151C2C] w-full max-w-sm rounded-2xl border border-red-500/50 flex flex-col shadow-[0_0_30px_rgba(239,68,68,0.15)] transform scale-95 opacity-0 transition-all duration-300" id="modalEliminarUsuarioContent">
+        
+        <div class="p-6 text-center">
+            <div class="w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl border border-red-500/20">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Advertencia de Seguridad</h3>
+            <p class="text-sm text-slate-300 font-bold mb-1">¿ESTÁ SEGURO DE ELIMINAR ESTE USUARIO?</p>
+            <p class="text-[10px] text-slate-500">Esta acción no se puede deshacer.</p>
+        </div>
+        
+        <div class="p-4 border-t border-slate-700/50 bg-[#0B1120] flex justify-center gap-3 rounded-b-2xl">
+            <button type="button" onclick="cerrarModalEliminarUsuario()" class="px-6 py-2 rounded-lg text-slate-400 font-bold hover:text-slate-200 transition-colors text-sm bg-slate-800 hover:bg-slate-700">Cancelar</button>
+            
+            <button type="button" onclick="ejecutarEliminacionDefinitiva()" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-bold transition-all shadow-[0_0_15px_rgba(239,68,68,0.4)] text-sm">
+                Aceptar
+            </button>
+        </div>
+
+    </div>
+</div>
