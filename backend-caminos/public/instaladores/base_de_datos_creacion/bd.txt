@@ -1,0 +1,251 @@
+
+
+
+
+
+-- =========================================================================
+-- SCRIPT DE CREACIÓN DE BASE DE DATOS: SISTEMA CAMINOS
+-- MOTOR: PostgreSQL
+-- =========================================================================
+
+-- 1. TABLA DE ROLES
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    nombre_rol VARCHAR(50) UNIQUE NOT NULL,
+    descripcion TEXT,
+    permiso_leer BOOLEAN DEFAULT true,
+    permiso_crear BOOLEAN DEFAULT false,
+    permiso_editar BOOLEAN DEFAULT false,
+    permiso_eliminar BOOLEAN DEFAULT false,
+    permiso_pdf BOOLEAN DEFAULT false,
+    permiso_prestar BOOLEAN DEFAULT false,
+    permiso_admin_usuarios BOOLEAN DEFAULT false,
+    permiso_admin_gestiones BOOLEAN DEFAULT false
+);
+
+-- 2. TABLA DE USUARIOS
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    rol_id INT REFERENCES roles(id), 
+    en_linea BOOLEAN DEFAULT false, 
+    nombre_completo VARCHAR(150) NOT NULL,
+    telefono VARCHAR(50),
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    contrasenia VARCHAR(255) NOT NULL
+);
+
+-- 3. TABLA DE GESTIONES (Años)
+CREATE TABLE gestiones (
+    anio INT PRIMARY KEY,
+    estado VARCHAR(50) DEFAULT 'abierta',
+    ultimo_usuario_id INT REFERENCES usuarios(id),
+    fecha_ultimo_uso TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. TABLA: FORMULARIOS C-31 CIP
+CREATE TABLE c31_cip (
+    id SERIAL PRIMARY KEY,
+    gestion INT REFERENCES gestiones(anio),
+    correlativo INT, 
+    beneficiario VARCHAR(200) NOT NULL,
+    detalle_resumen TEXT,
+    n_preventivo VARCHAR(50),
+    n_compromiso VARCHAR(50),
+    n_devengado VARCHAR(50),
+    n_secuencia INT,
+    importe NUMERIC(15, 2),
+    fojas INT,
+    hoja_ruta VARCHAR(50),
+    n_libro_registro VARCHAR(50),
+    ubicacion_fisica VARCHAR(100),
+    ruta_archivo VARCHAR(255),
+    
+    -- AUDITORÍA Y CANDADO
+    usuario_creador_id INT REFERENCES usuarios(id),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_editor_id INT REFERENCES usuarios(id),
+    fecha_edicion TIMESTAMP,
+    UNIQUE (gestion, correlativo)
+);
+
+-- 5. TABLA: FORMULARIOS C-31 SIP
+CREATE TABLE c31_sip (
+    id SERIAL PRIMARY KEY,
+    gestion INT REFERENCES gestiones(anio),
+    correlativo INT, 
+    beneficiario VARCHAR(200) NOT NULL,
+    detalle_resumen TEXT,
+    n_devengado VARCHAR(50),
+    pago VARCHAR(50),
+    n_secuencia INT,
+    importe NUMERIC(15, 2),
+    fojas INT,
+    hoja_ruta VARCHAR(50),
+    n_libro_registro VARCHAR(50),
+    ubicacion_fisica VARCHAR(100),
+    ruta_archivo VARCHAR(255),
+    
+    -- AUDITORÍA Y CANDADO
+    usuario_creador_id INT REFERENCES usuarios(id),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_editor_id INT REFERENCES usuarios(id),
+    fecha_edicion TIMESTAMP,
+    UNIQUE (gestion, correlativo)
+);
+
+-- 6. TABLA: FORMULARIOS C-21 ER CIP
+CREATE TABLE c21_er_cip (
+    id SERIAL PRIMARY KEY,
+    gestion INT REFERENCES gestiones(anio),
+    correlativo INT, 
+    beneficiario VARCHAR(200) NOT NULL,
+    detalle_resumen TEXT,
+    n_devengado VARCHAR(50),
+    importe NUMERIC(15, 2),
+    fojas INT,
+    hoja_ruta VARCHAR(50),
+    n_libro_registro VARCHAR(50),
+    ubicacion_fisica VARCHAR(100),
+    ruta_archivo VARCHAR(255),
+    
+    -- AUDITORÍA Y CANDADO
+    usuario_creador_id INT REFERENCES usuarios(id),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_editor_id INT REFERENCES usuarios(id),
+    fecha_edicion TIMESTAMP,
+    UNIQUE (gestion, correlativo)
+);
+
+-- 7. TABLA: FORMULARIOS C-21 ER SIP
+CREATE TABLE c21_er_sip (
+    id SERIAL PRIMARY KEY,
+    gestion INT REFERENCES gestiones(anio),
+    correlativo INT, 
+    beneficiario VARCHAR(200) NOT NULL,
+    detalle_resumen TEXT,
+    sip_sin_imputacion_presupuestaria VARCHAR(50),
+    importe NUMERIC(15, 2),
+    fojas INT,
+    hoja_ruta VARCHAR(50),
+    n_libro_registro VARCHAR(50),
+    ubicacion_fisica VARCHAR(100),
+    ruta_archivo VARCHAR(255),
+    
+    -- AUDITORÍA Y CANDADO
+    usuario_creador_id INT REFERENCES usuarios(id),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_editor_id INT REFERENCES usuarios(id),
+    fecha_edicion TIMESTAMP,
+    UNIQUE (gestion, correlativo)
+);
+
+-- 8. TABLA: ASIENTOS MANUALES
+CREATE TABLE asientos_manuales (
+    id SERIAL PRIMARY KEY,
+    gestion INT REFERENCES gestiones(anio),
+    correlativo INT, 
+    detalle_glosa TEXT,
+    n_documento VARCHAR(50),
+    importe NUMERIC(15, 2),
+    hoja_ruta VARCHAR(50),
+    n_libro_registro VARCHAR(50),
+    ubicacion_fisica VARCHAR(100),
+    ruta_archivo VARCHAR(255),
+    
+    -- AUDITORÍA Y CANDADO
+    usuario_creador_id INT REFERENCES usuarios(id),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_editor_id INT REFERENCES usuarios(id),
+    fecha_edicion TIMESTAMP,
+    UNIQUE (gestion, correlativo)
+);
+
+-- 9. TABLA: PRÉSTAMOS DE DOCUMENTOS FÍSICOS
+CREATE TABLE prestamos (
+    id SERIAL PRIMARY KEY,
+    gestion_prestamo INT REFERENCES gestiones(anio), 
+    correlativo INT,                                 
+    estado VARCHAR(50) DEFAULT 'pendiente', 
+    fecha_prestamo DATE DEFAULT CURRENT_DATE,
+    nombre_completo VARCHAR(150) NOT NULL,
+    unidad_solicitante VARCHAR(100) NOT NULL,
+    tipo_documento VARCHAR(50) NOT NULL,
+    gestion_documento INT REFERENCES gestiones(anio), 
+    codigo_doc VARCHAR(50), 
+    detalle_glosa TEXT,
+    fecha_limite DATE NOT NULL,
+    fecha_de_devolucion DATE,
+    
+    -- AUDITORÍA Y CANDADO
+    usuario_creador_id INT REFERENCES usuarios(id),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_editor_id INT REFERENCES usuarios(id),
+    fecha_edicion TIMESTAMP,
+    UNIQUE (gestion_prestamo, correlativo)
+);
+
+
+-- 1. Tabla para Empastados C-31 CIP
+CREATE TABLE empastados_c31_cip (
+    id_c31_cip SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    numero_empastado VARCHAR(50) UNIQUE NOT NULL,
+    gestion INT,
+    preventivo VARCHAR(100),
+    ubicacion_fisica VARCHAR(255) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Tabla para Empastados C-31 SIP
+CREATE TABLE empastados_c31_sip (
+    id_c31_sip SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    numero_empastado VARCHAR(50) UNIQUE NOT NULL,
+    gestion INT,
+    preventivo VARCHAR(100),
+    ubicacion_fisica VARCHAR(255) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3. Tabla para Empastados C-21 CIP
+CREATE TABLE empastados_c21_cip (
+    id_c21_cip SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    numero_empastado VARCHAR(50) UNIQUE NOT NULL,
+    gestion INT,
+    preventivo VARCHAR(100),
+    ubicacion_fisica VARCHAR(255) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. Tabla para Empastados C-21 SIP
+CREATE TABLE empastados_c21_sip (
+    id_c21_sip SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    numero_empastado VARCHAR(50) UNIQUE NOT NULL,
+    gestion INT,
+    preventivo VARCHAR(100),
+    ubicacion_fisica VARCHAR(255) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 5. Tabla para Empastados Asientos Manuales
+CREATE TABLE empastados_asientos_manuales (
+    id_asiento_manual SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    numero_empastado VARCHAR(50) UNIQUE NOT NULL,
+    gestion INT,
+    preventivo VARCHAR(100),
+    ubicacion_fisica VARCHAR(255) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 6. Tabla para Empastados Bancarización
+CREATE TABLE empastados_bancarizacion (
+    id_bancarizacion SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    numero_empastado VARCHAR(50) UNIQUE NOT NULL,
+    gestion INT,
+    ubicacion_fisica VARCHAR(255) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
