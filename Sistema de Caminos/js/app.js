@@ -281,7 +281,7 @@ function cargarDoc(nombre, rutaArchivo) {
     }
 
     document.getElementById('tituloDocModal').innerHTML = `<i class="fas fa-file-pdf text-red-400 mr-2"></i> Viendo: ${nombre}`;
-    document.getElementById('visorPdfModal').src = `http://192.168.1.12:3000/${rutaArchivo}?t=${Date.now()}`;
+    document.getElementById('visorPdfModal').src = `http://192.168.1.17:3000/${rutaArchivo}?t=${Date.now()}`;
 
     modal.classList.remove('hidden');
     setTimeout(() => {
@@ -302,7 +302,7 @@ function cerrarSesion() {
     const userStr = sessionStorage.getItem('usuario_actual');
     if (userStr) {
         const user = JSON.parse(userStr);
-        fetch('http://192.168.1.12:3000/api/auth/logout', {
+        fetch('http://192.168.1.17:3000/api/auth/logout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: user.id })

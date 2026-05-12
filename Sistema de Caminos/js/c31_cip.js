@@ -114,7 +114,7 @@ async function cargarTablaC31Cip(){
     cuerpoTabla.innerHTML = `<tr><td colspan="15" class="p-4 text-center text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i> Cargando registros de la Gestión ${gestionActiva}...</td></tr>`;
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/c31-cip?gestion=${gestionActiva}`);
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/c31-cip?gestion=${gestionActiva}`);
         listaRegistrosC31 = await respuesta.json();
         renderizarTablaC31(listaRegistrosC31);
     } catch (error) {
@@ -236,7 +236,7 @@ async function guardarRegistroC31() {
         usuario_id: usuarioLogueado ? usuarioLogueado.id : null 
     };
 
-    let url = 'http://192.168.1.12:3000/api/c31-cip';
+    let url = 'http://192.168.1.17:3000/api/c31-cip';
     let metodo = 'POST';
     if (idOculto !== "") { url = `${url}/${idOculto}`; metodo = 'PUT'; }
 
@@ -253,7 +253,7 @@ async function guardarRegistroC31() {
 async function eliminarRegistroC31(id) {
     if (!confirm("¿Eliminar documento permanentemente?")) return;
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/c31-cip/${id}`, { method: 'DELETE' });
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/c31-cip/${id}`, { method: 'DELETE' });
         const resultado = await respuesta.json();
         if (resultado.exito) cargarTablaC31Cip(); 
     } catch (e) { alert('Error al eliminar.'); }

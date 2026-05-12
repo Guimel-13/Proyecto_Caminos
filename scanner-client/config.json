@@ -1,6 +1,6 @@
 {
   "puerto_local": 4010,
-  "servidor_central": "http://192.168.1.12:3000",
+  "servidor_central": "http://192.168.1.17:3000",
   "naps2_path": "C:\\Program Files\\NAPS2\\NAPS2.Console.exe",
   "perfil_naps2": "EpsonLocal",
   "temp_dir": "temp_scans_local",

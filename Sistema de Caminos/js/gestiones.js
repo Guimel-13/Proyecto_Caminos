@@ -8,7 +8,7 @@ window.gestionAbierta = false;
 // 1. OBTENER GESTIONES DESDE EL BACKEND
 async function cargarGestionesDesdeBD() {
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/gestiones');
+        const respuesta = await fetch('http://192.168.1.17:3000/api/gestiones');
         const datos = await respuesta.json();
         
         gestionesRegistradas = datos.map(g => g.anio); 
@@ -108,7 +108,7 @@ async function guardarNuevaGestionBD() {
     }
 
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/gestiones', {
+        const respuesta = await fetch('http://192.168.1.17:3000/api/gestiones', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ anio: parseInt(anioTexto) })

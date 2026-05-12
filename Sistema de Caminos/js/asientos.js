@@ -104,7 +104,7 @@ async function cargarTablaAsientos() {
     cuerpoTabla.innerHTML = `<tr><td colspan="10" class="p-4 text-center text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i> Cargando Asientos Manuales...</td></tr>`;
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/asientos?gestion=${gestionActiva}`);
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/asientos?gestion=${gestionActiva}`);
         listaRegistrosAsientos = await respuesta.json();
         renderizarTablaAsientos(listaRegistrosAsientos);
     } catch (error) {
@@ -190,7 +190,7 @@ async function guardarRegistroAsientos() {
         usuario_id: usuarioLogueado ? usuarioLogueado.id : null
     };
 
-    let url = 'http://192.168.1.12:3000/api/asientos';
+    let url = 'http://192.168.1.17:3000/api/asientos';
     let metodo = 'POST';
 
     if (idOculto !== "") {
@@ -224,7 +224,7 @@ async function eliminarRegistroAsientos(id) {
     if (!confirm("¿Eliminar este Asiento Manual?")) return;
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/asientos/${id}`, { method: 'DELETE' });
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/asientos/${id}`, { method: 'DELETE' });
         const resultado = await respuesta.json();
         if (resultado.exito) cargarTablaAsientos();
     } catch (e) {

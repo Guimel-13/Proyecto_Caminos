@@ -14,12 +14,12 @@ async function cargarTablaUsuarios() {
     try {
         // 1. Primero cargamos los roles para poder armar el "Cambio Rápido" en la tabla
         if (rolesGlobales.length === 0) {
-            const resRoles = await fetch('http://192.168.1.12:3000/api/roles');
+            const resRoles = await fetch('http://192.168.1.17:3000/api/roles');
             rolesGlobales = await resRoles.json();
         }
 
         // 2. Cargamos los usuarios
-        const respuesta = await fetch('http://192.168.1.12:3000/api/usuarios'); 
+        const respuesta = await fetch('http://192.168.1.17:3000/api/usuarios'); 
         usuariosRegistrados = await respuesta.json();
 
         if (usuariosRegistrados.length === 0) {
@@ -112,7 +112,7 @@ async function cambioRapidoRol(userId, nuevoRolId, selectElement) {
     };
 
     try {
-        const res = await fetch(`http://192.168.1.12:3000/api/usuarios/${userId}`, {
+        const res = await fetch(`http://192.168.1.17:3000/api/usuarios/${userId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datosActualizados)
@@ -174,7 +174,7 @@ async function cargarRolesParaModal(rolSeleccionado = '') {
     selectRoles.innerHTML = '<option value="">Cargando roles reales...</option>';
 
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/roles');
+        const respuesta = await fetch('http://192.168.1.17:3000/api/roles');
         rolesGlobales = await respuesta.json();
     } catch (error) {
         selectRoles.innerHTML = '<option value="">❌ Error de conexión</option>';
@@ -234,11 +234,11 @@ async function guardarUsuarioBD() {
         nombre_completo: nom, telefono: tel, rol_id: rol, usuario: usr, contrasenia: pwd
     };
 
-    let url = 'http://192.168.1.12:3000/api/usuarios';
+    let url = 'http://192.168.1.17:3000/api/usuarios';
     let metodo = 'POST'; 
 
     if (idOculto !== "") {
-        url = `http://192.168.1.12:3000/api/usuarios/${idOculto}`;
+        url = `http://192.168.1.17:3000/api/usuarios/${idOculto}`;
         metodo = 'PUT';
     }
 
@@ -303,7 +303,7 @@ async function ejecutarEliminacionDefinitiva() {
     cerrarModalEliminarUsuario(); // Cerramos el modal visual
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/usuarios/${idUsuarioAEliminar}`, { method: 'DELETE' });
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/usuarios/${idUsuarioAEliminar}`, { method: 'DELETE' });
         const resultado = await respuesta.json();
         
         if (resultado.exito) {

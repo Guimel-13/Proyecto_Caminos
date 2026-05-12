@@ -98,7 +98,7 @@ async function actualizarPerfilBD() {
     };
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/perfil/${usuarioLogueado.id}`, {
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/perfil/${usuarioLogueado.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(paquete)
@@ -164,7 +164,7 @@ async function cerrarSesion() {
     if (usuarioStr) {
         const usuario = JSON.parse(usuarioStr);
         try {
-            await fetch('http://192.168.1.12:3000/api/auth/logout', {
+            await fetch('http://192.168.1.17:3000/api/auth/logout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: usuario.id })

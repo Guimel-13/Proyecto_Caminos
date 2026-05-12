@@ -1,4 +1,4 @@
-const API_EMPASTADOS = 'http://192.168.1.12:3000/api/empastados';
+const API_EMPASTADOS = 'http://192.168.1.17:3000/api/empastados';
 
 let tipoEmpastadoActivo = 'c31_cip';
 let vistaEmpastadosInicializada = false;

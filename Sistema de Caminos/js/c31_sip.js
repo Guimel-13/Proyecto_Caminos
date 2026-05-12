@@ -102,7 +102,7 @@ async function cargarTablaC31Sip() {
     cuerpoTabla.innerHTML = `<tr><td colspan="14" class="p-4 text-center text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i> Cargando registros SIP...</td></tr>`;
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/c31-sip?gestion=${gestionActiva}`);
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/c31-sip?gestion=${gestionActiva}`);
         listaRegistrosSip = await respuesta.json();
         renderizarTablaSip(listaRegistrosSip);
     } catch (error) {
@@ -197,7 +197,7 @@ async function guardarRegistroSip() {
         usuario_id: usuarioLogueado ? usuarioLogueado.id : null 
     };
 
-    let url = 'http://192.168.1.12:3000/api/c31-sip';
+    let url = 'http://192.168.1.17:3000/api/c31-sip';
     let metodo = 'POST';
     if (idOculto !== "") { url = `${url}/${idOculto}`; metodo = 'PUT'; }
 
@@ -214,7 +214,7 @@ async function guardarRegistroSip() {
 async function eliminarRegistroSip(id) {
     if (!confirm("¿Eliminar este documento SIP?")) return;
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/c31-sip/${id}`, { method: 'DELETE' });
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/c31-sip/${id}`, { method: 'DELETE' });
         const resultado = await respuesta.json();
         if (resultado.exito) cargarTablaC31Sip(); 
     } catch (e) { alert('Error de conexión.'); }

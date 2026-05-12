@@ -3,7 +3,7 @@ const router = express.Router();
 const C31Controlador = require('./c31_cip.controlador');
 
 
-// Rutas para C31 CIP - http://192.168.1.12:3000/api/c31-cip
+// Rutas para C31 CIP - http://192.168.1.17:3000/api/c31-cip
 
 // Cuando el frontend pida los datos para mostrar la tabla (GET)
 router.get('/', C31Controlador.listarRegistros);

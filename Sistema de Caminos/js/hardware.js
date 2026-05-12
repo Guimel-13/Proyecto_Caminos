@@ -3,7 +3,7 @@
    ========================================================= */
 
 const URL_LOCAL = 'http://localhost:4010';
-const URL_SERVIDOR = 'http://192.168.1.12:3000';
+const URL_SERVIDOR = 'http://192.168.1.17:3000';
 
 async function probarEscanerLocal() {
     try {

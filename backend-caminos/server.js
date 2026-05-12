@@ -48,7 +48,7 @@ const intervalo = setInterval(() => {
             process.stdout.write(
                 `[${"#".repeat(total)}] 100.00% - Servidor listo\n`
             );
-            console.log(`En --->[ http://192.168.1.12:${PORT} ]`);
+            console.log(`En --->[ http://192.168.1.17:${PORT} ]`);
         });
     }
 }, 50);

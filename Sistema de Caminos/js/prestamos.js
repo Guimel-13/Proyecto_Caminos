@@ -12,7 +12,7 @@ async function cargarTablaPrestamos() {
     tbody.innerHTML = `<tr><td colspan="9" class="p-4 text-center text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i> Cargando historial de préstamos...</td></tr>`;
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/prestamos?gestion=${gestionActiva}`);
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/prestamos?gestion=${gestionActiva}`);
         listaPrestamos = await respuesta.json();
         renderizarTablaPrestamos(listaPrestamos);
     } catch (error) {
@@ -114,7 +114,7 @@ async function ejecutarBusquedaAvanzada() {
     else if (docTipo === 'Asiento Manual') endpoint = 'asientos';
 
     try {
-        const res = await fetch(`http://192.168.1.12:3000/api/${endpoint}?gestion=${docGestion}`);
+        const res = await fetch(`http://192.168.1.17:3000/api/${endpoint}?gestion=${docGestion}`);
         const datos = await res.json();
 
         const filtrados = datos.filter(reg => {
@@ -364,7 +364,7 @@ async function guardarRegistroPrestamo() {
     }
 
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/prestamos', {
+        const respuesta = await fetch('http://192.168.1.17:3000/api/prestamos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datos)
@@ -383,7 +383,7 @@ async function ejecutarDevolucionBD(id) {
     if(!confirm("¿Confirmar que el documento físico ha sido devuelto al estante?")) return;
     const usuarioLogueado = JSON.parse(sessionStorage.getItem('usuario_actual') || 'null');
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/prestamos/${id}/devolver`, {
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/prestamos/${id}/devolver`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ usuario_id: usuarioLogueado ? usuarioLogueado.id : null })
@@ -399,7 +399,7 @@ async function ejecutarDevolucionBD(id) {
 async function eliminarPrestamoBD(id) {
     if(!confirm("⚠️ ¿Estás seguro de eliminar el registro de este préstamo del historial?")) return;
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/prestamos/${id}`, { method: 'DELETE' });
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/prestamos/${id}`, { method: 'DELETE' });
         const resultado = await respuesta.json();
         if (resultado.exito) cargarTablaPrestamos(); 
     } catch (e) { alert('Error de conexión.'); }

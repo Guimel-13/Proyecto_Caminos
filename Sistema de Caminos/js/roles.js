@@ -11,7 +11,7 @@ async function cargarTablaRoles() {
     tbody.innerHTML = `<tr><td colspan="11" class="p-4 text-center text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i> Cargando roles dende PostgreSQL...</td></tr>`;
 
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/roles');
+        const respuesta = await fetch('http://192.168.1.17:3000/api/roles');
         rolesRegistrados = await respuesta.json();
 
         if (rolesRegistrados.length === 0) {
@@ -146,11 +146,11 @@ async function guardarRolBD() {
         }
     };
 
-    let url = 'http://192.168.1.12:3000/api/roles';
+    let url = 'http://192.168.1.17:3000/api/roles';
     let metodo = 'POST'; // Crear nuevo
 
     if (id !== '') {
-        url = `http://192.168.1.12:3000/api/roles/${id}`;
+        url = `http://192.168.1.17:3000/api/roles/${id}`;
         metodo = 'PUT'; // Editar existente
     }
 
@@ -187,7 +187,7 @@ async function eliminarRolBD(id) {
     if(!confirm("¿Estás seguro de que deseas eliminar este rol?")) return;
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/roles/${id}`, { method: 'DELETE' });
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/roles/${id}`, { method: 'DELETE' });
         const resultado = await respuesta.json();
 
         if (resultado.exito) {

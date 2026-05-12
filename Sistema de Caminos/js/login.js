@@ -5,7 +5,7 @@
 // 1. VERIFICAR EL ESTADO DEL SISTEMA AL CARGAR LA PÁGINA
 window.onload = async () => {
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/usuarios/setup/verificar');
+        const respuesta = await fetch('http://192.168.1.17:3000/api/usuarios/setup/verificar');
         const datos = await respuesta.json();
 
         // Si el sistema dice que está vacío (requiereSetup es true)
@@ -36,7 +36,7 @@ async function iniciarSesion(event) {
     btnSubmit.disabled = true;
 
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/auth/login', {
+        const respuesta = await fetch('http://192.168.1.17:3000/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: user, password: pass }) 
@@ -107,7 +107,7 @@ async function crearPrimerAdmin() {
     };
 
     try {
-        const respuesta = await fetch('http://192.168.1.12:3000/api/usuarios/setup/crear-admin', {
+        const respuesta = await fetch('http://192.168.1.17:3000/api/usuarios/setup/crear-admin', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datosNuevos)

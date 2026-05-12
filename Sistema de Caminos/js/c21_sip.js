@@ -98,7 +98,7 @@ async function cargarTablaC21Sip() {
     cuerpoTabla.innerHTML = `<tr><td colspan="12" class="p-4 text-center text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i> Cargando registros C-21 SIP...</td></tr>`;
 
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/c21-sip?gestion=${gestionActiva}`);
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/c21-sip?gestion=${gestionActiva}`);
         listaRegistrosC21Sip = await respuesta.json();
         renderizarTablaC21Sip(listaRegistrosC21Sip);
     } catch (error) {
@@ -189,7 +189,7 @@ async function guardarRegistroC21Sip() {
         usuario_id: usuarioLogueado ? usuarioLogueado.id : null 
     };
 
-    let url = 'http://192.168.1.12:3000/api/c21-sip';
+    let url = 'http://192.168.1.17:3000/api/c21-sip';
     let metodo = 'POST';
     if (idOculto !== "") { url = `${url}/${idOculto}`; metodo = 'PUT'; }
 
@@ -206,7 +206,7 @@ async function guardarRegistroC21Sip() {
 async function eliminarRegistroC21Sip(id) {
     if (!confirm("¿Eliminar este documento C-21 SIP?")) return;
     try {
-        const respuesta = await fetch(`http://192.168.1.12:3000/api/c21-sip/${id}`, { method: 'DELETE' });
+        const respuesta = await fetch(`http://192.168.1.17:3000/api/c21-sip/${id}`, { method: 'DELETE' });
         const resultado = await respuesta.json();
         if (resultado.exito) cargarTablaC21Sip(); 
     } catch (e) { alert('Error de conexión.'); }
